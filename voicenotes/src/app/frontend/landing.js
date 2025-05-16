@@ -5,8 +5,8 @@ import React from "react";
 export default function Landing() {
 
     return (
-        <div>
-            <h1>VoiceNotes</h1>
+        <div className="mt-70 m-5">
+            <h1 className="text-9xl font tracking-wider">VoiceNotes</h1>
         </div>
     )
 
