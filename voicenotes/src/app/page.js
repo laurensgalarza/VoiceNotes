@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import NavBar from "./frontend/navbar";
 import Landing from "./frontend/landing";
@@ -11,7 +12,7 @@ export default function Home() {
       <nav>
         <NavBar/>
       </nav>
-      
+
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         
         <Landing/>
