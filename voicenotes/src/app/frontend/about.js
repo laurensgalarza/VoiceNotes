@@ -8,6 +8,7 @@ import { Volume2 } from 'lucide-react';
 export default function Landing() {
   return (
     <div>
+        <section id="about" className="scroll-mt-80"> </section>
         <div className="flex flex-col items-center justify-center">
           <div className="max-w-lg text-center">
             <p className="text-xl font-medium">
@@ -24,7 +25,7 @@ export default function Landing() {
             Start generating
           </button>
         </div>
-        <div className="mt-100 mb-10 font-bold text-4xl text-center ">  
+        <div className="mt-70 mb-10 font-bold text-4xl text-center ">  
           Tailor studying to fit your needs
         </div>
 

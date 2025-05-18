@@ -10,8 +10,8 @@ export default function NavBar() {
 
       {/* links */}
       <div className="space-x-6 text-lg px-8">
-        <a href="/about" className="hover:underline hover:text-blue-400 transition-colors duration-300 hover:shadow-lg">About</a>
-        <a href="/upload" className="hover:underline hover:text-red-400 transition-colors duration-300 hover:shadow-lg">Upload</a>
+        <a href="#about" className="hover:underline hover:text-blue-400 transition-colors duration-300 hover:shadow-lg">About</a>
+        <a href="#upload" className="hover:underline hover:text-red-400 transition-colors duration-300 hover:shadow-lg">Upload</a>
       </div>
     </nav>
   );

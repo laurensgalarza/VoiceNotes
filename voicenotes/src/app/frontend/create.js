@@ -1,12 +1,15 @@
 //create a voicenote section
 import React from "react";
+import { X } from 'lucide-react';
 
 export default function Create() {
 
     return (
-    <div className="mt-40 min-h-screen bg-white flex flex-col items-center p-6 ">
-        <h1 className="text-4xl font-bold mb-8">Create a VoiceNote</h1>
 
+    <div className="mt-40 min-h-screen bg-white flex flex-col items-center p-6 ">       
+      
+        <section id="upload" className="scroll-mt-40"> </section>
+        <h1 className="text-4xl font-bold mb-8">Create a VoiceNote</h1>
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
             
             <div className="flex-1 bg-gray-100 rounded-2xl shadow-md p-6 ">
@@ -45,28 +48,35 @@ export default function Create() {
             <div className="flex-1 bg-gray-100 rounded-2xl shadow-md p-6">
             <h2 className="text-lg font-semibold mb-4 text-center border-b border-white-300 w-full my-4 pb-3">Configuration</h2>
 
-            <div className="mb-4">
-                <label className="block text-m  font-medium mb-1 text-center">Grade Level</label>
-                <input type=" text" placeholder="ex. College Sophomore" className="w/2 px-3 py-2 border rounded-md mx-auto flex" />
+            <div className="mb-4 relative"> {/* Make the container relative for absolute positioning */}
+                <label className="block text-m font-medium mb-1 text-center">Grade Level</label>
+
+                <input type="text" placeholder="ex. College Sophomore" className="w/2 px-3 py-2 border rounded-md mx-auto flex" />
+                <button className="absolute inset-y-0 right-2 flex items-center cursor-pointer text-gray-500 hover:text-gray-700">
+                    <X className="text-lg mt-7 mr-11 " />
+                </button>
             </div>
 
             <div className="flex flex-col mb-4 items-center">
                 <label className="block text-m  font-medium mb-1 text-center">Type of Story</label>
-                <div className="flex gap-2">
+                <div className="flex">
                 <button className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md cursor-pointer">Educational</button>
                 <button className="bg-gray-800 text-white px-3 py-1 rounded-md cursor-pointer">Creative</button>
                 </div>
             </div>
             
 
-            <div className="mb-4">
+            <div className="mb-4 relative">
                 <label className="block text-m font-medium mb-1 text-center">Genre</label>
                 <input type="text" placeholder="ex. Mystery" className="w/2 px-3 py-2 border rounded-md mx-auto flex" />
+                <button className="absolute inset-y-0 right-2 flex items-center cursor-pointer text-gray-500 hover:text-gray-700">
+                    <X className="text-lg mt-7 mr-11" />
+                </button>
             </div>
 
             <div className="flex flex-col mb-4 items-center ">
                 <label className="block text-m font-medium mb-1 text-center">Narration Style</label>
-                <div className="flex gap-2">
+                <div className="flex">
                 <button className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md cursor-pointer">First Person</button>
                 <button className="bg-gray-800 text-white px-3 py-1 rounded-md cursor-pointer">Third Person</button>
                 </div>
