@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Volume2 } from 'lucide-react';
+import Create from "./create";
 
 export default function Result() {
 
