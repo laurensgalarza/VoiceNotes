@@ -18,14 +18,18 @@ export default function Landing() {
               story.
             </p>
           </div>
-          <button className="mt-10 bg-gray-800 text-white px-11 py-4 rounded-lg text-xl hover:bg-gray-950 scale-108 focus:outline-none focus:ring-1
+          <a href="#upload" className="mt-10 bg-gray-800 text-white px-11 py-4 rounded-lg text-xl hover:bg-gray-950 scale-108 focus:outline-none focus:ring-1
                       focus:ring-gray-400 focus:ring-opacity-70 transition-all duration-500 cursor-pointer
                       hover:text-green-400 transition-colors hover:shadow-lg active:scale-105 active:opacity-80 active:text-yellow-300 ">
 
             Start generating
-          </button>
+          </a>
         </div>
-        <div className="mt-70 mb-10 font-bold text-4xl text-center ">  
+        <div className="hidden md:flex mt-70 mb-10 font-bold text-4xl text-center mx-auto w-fit">  
+          Tailor studying to fit your needs
+        </div>
+
+        <div className="md:hidden mt-70 mb-10 font-bold text-3xl text-center mx-auto w-fit  ">  
           Tailor studying to fit your needs
         </div>
 
@@ -56,7 +60,7 @@ export default function Landing() {
 
         <ArrowRight className="w-11 h-11 text-gray-400" />
 
-        {/* Step 3 Download */}
+        {/* Step 3 download */}
         <div className="flex flex-col items-center gap-2">
           <div className="flex flex-col w-48 h-35 bg-gray-300 rounded-3xl flex items-center justify-center border-2 border-gray-630">
             <Volume2 className="mb-4 w-10 h-10 text-black-900" />
@@ -69,7 +73,7 @@ export default function Landing() {
 
       {/* bottom*/}
       <div className="flex justify-center gap-10 mt-12 ">
-        <p className="flex flex-col w-50 h-35 bg-gray-100 rounded-3xl flex items-center justify-center max-w-[280px] text-center border-2 border-gray-630">
+        <p className="flex flex w-50 h-35 bg-gray-100 rounded-3xl flex items-center justify-center max-w-[280px] text-center border-2 border-gray-630">
           ChatGPT generates a podcast based on your preferences
         </p>
         
