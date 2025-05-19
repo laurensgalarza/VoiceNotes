@@ -1,10 +1,8 @@
 //resulting podcast section
-
-import React from "react";
+"use client"
+import React, {useState, useEffect} from "react";
 import { Volume2 } from 'lucide-react';
-import Create from "./create";
-
-export default function Result() {
+export default function Result({story}) {
 
   return (
     
@@ -13,7 +11,8 @@ export default function Result() {
         Your Study Podcast
       </h1>
       <div className="bg-gray-200 px-18 pt-10 pb-5 rounded-4xl mb-8 text-gray-700 leading-relaxed text-left">
-        <p className="mb-4">
+        {story ? (<p className="mb-4">{story}</p>) : 
+        (<div><p className="mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus metus et
           laoreet venenatis. Curabitur pretium consectetur dolor vel scelerisque. Quisque at
           sodales dolor.
@@ -27,7 +26,8 @@ export default function Result() {
           Morbi lacus dolor, rutrum id sem a, placerat dapibus tortor. Nunc ac molestie
           lectus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam ut
           eleifend lacus. Suspendisse potenti.
-        </p>
+        </p></div>)}
+        
 
               {/* speaker button*/}
         <div className="flex justify-end">

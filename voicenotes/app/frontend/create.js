@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { X } from 'lucide-react';
 import SourceFile from "./components/SourceFile";
 
-export default function Create() {
+export default function Create({setStory, setLoadingScreen}) {
 
     const [topic, setTopic] = useState("")
     const [files, setFiles] = useState([])
@@ -16,9 +16,6 @@ export default function Create() {
         narration: "first person"
 
     })
-
-    const [loadingScreen, setLoadingScreen] = useState(false)
-    const [story, setStory] = useState("")
 
     const handleGenerate = async () => {
         setLoadingScreen(true)
@@ -32,7 +29,7 @@ export default function Create() {
         }
 
         //send to route.js
-        const response = await fetch("/api/generateStory/", {
+        const response = await fetch("/api/generateStory", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,6 +40,7 @@ export default function Create() {
         const data = await response.json()
 
         if(data.story){
+            alert("story generated")
             setStory(data.story)
         }
         else{
@@ -56,11 +54,7 @@ export default function Create() {
     return (
 
     <div className="mt-40 min-h-screen bg-white flex flex-col items-center p-6 ">       
-        {loadingScreen && (<div id="loading" className="position-absolute min-h-screen min-w-screen bg-white bg-opacity-75">
-            <h1>Generating Story</h1>
-            <h2>...</h2>
-            
-        </div>)}
+
         <section id="upload" className="scroll-mt-40"> </section>
         <h1 className="text-4xl font-bold mb-8">Create a VoiceNote</h1>
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
