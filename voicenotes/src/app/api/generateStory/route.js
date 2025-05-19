@@ -1,10 +1,44 @@
 //route.js that configures the openrouter api call
 export async function POST(req) {
-    const { prompt } = await req.json();
+
+    try{
+        const {
+            topic,
+            fileTexts, //file array
+            gradeLevel,
+            storyType,
+            genre,
+            narration
+        } = await req.json();
+
+    const inputText = [];
+
+    if (topic){
+        inputText.push("Topic: " + topic)
+    }
+    if(Array.isArray(fileTexts) && fileTexts.length > 0){
+        inputText.push("Uploaded File Content: \n" + fileTexts.join("\n\n"))
+    }
+
+    if (inputText.length === 0){
+        return new Response(JSON.stringify({error: "No topic or file uploaded"}), {status: 400})
+    }
+
+
+    const prompt = `You are an educational storytelling assitant.
+    
+    Generate a ${storyType} story for a ${gradeLevel} student. The story should be in the ${genre} genre, told in the ${narration} narration style, based on the following material:
+
+    ${inputText.join("\n\n")}
+    
+    The story should be engaging, accurate, and appropriate for the students level of comprehension. Additionally, your story needs to be suitable for audio conversion.
+
+    Begin:
+    `
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-        "Authorization": "Bearer ${process.env.local.OPENROUTER_API_KEY}",
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json"
     },
         body: JSON.stringify({
@@ -18,6 +52,18 @@ export async function POST(req) {
     })
     })
 
+    
     const data = await response.json();
-    return Response.json(data)
+    const story = data.choices?.[0]?.message?.content;
+    
+    if(!story){
+        return new Response(JSON.stringify({error: "No story generated"}), {status: 500})
+    }
+    
+    return new Response(JSON.stringify({story}), {status:200})
+
+    } 
+    catch(error){
+        return new Response(JSON.stringify({error: "Story Generation Failed"}), {status: 500})
+    }
 }
