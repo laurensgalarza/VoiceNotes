@@ -6,7 +6,7 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="text-white bg-black fixed top-0 w-full flex justify-between items-center px-10 py-8 z-10">
+    <nav className="text-white bg-black fixed top-0 w-full flex justify-between items-center px-10 md:py-8 py-4 z-10">
       {/* title voicenotes*/}
       <div className="text-2xl font-medium">VoiceNotes</div>
 
