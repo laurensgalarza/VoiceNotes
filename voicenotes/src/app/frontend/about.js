@@ -30,7 +30,7 @@ export default function Landing() {
         </div>
 
         <div className="md:hidden mt-70 mb-10 font-bold text-3xl text-center mx-auto w-fit  ">  
-          Tailor studying to fit your needs
+                    Tailor studying to fit your needs
         </div>
 
       <div className="py-12">
@@ -73,7 +73,7 @@ export default function Landing() {
 
       {/* bottom*/}
       <div className="flex justify-center gap-10 mt-12 ">
-        <p className="flex flex w-50 h-35 bg-gray-100 rounded-3xl flex items-center justify-center max-w-[280px] text-center border-2 border-gray-630">
+      <p className="flex flex w-50 h-35 bg-gray-100 rounded-3xl flex items-center justify-center max-w-[280px] text-center border-2 border-gray-630">
           ChatGPT generates a podcast based on your preferences
         </p>
         

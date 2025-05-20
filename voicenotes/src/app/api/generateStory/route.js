@@ -1,4 +1,6 @@
 //route.js that configures the openrouter api call
+
+let currentStoryOutput = ""
 export async function POST(req) {
 
     try{
@@ -25,15 +27,15 @@ export async function POST(req) {
     }
 
 
-    const prompt = `You are an educational storytelling assitant.
+    const prompt = `You are an educational storytelling assitant. 
     
     Generate a ${storyType} story for a ${gradeLevel} student. The story should be in the ${genre} genre, told in the ${narration} narration style, based on the following material:
 
     ${inputText.join("\n\n")}
     
-    The story should be engaging, accurate, and appropriate for the students level of comprehension. Additionally, your story needs to be suitable for audio conversion.
+    The story should be engaging, accurate, and appropriate for the students level of comprehension. Additionally, the story must be in a Google Text to Speech compatible format.
 
-    Begin:
+    Only output the story. Begin:
     `
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
@@ -59,11 +61,12 @@ export async function POST(req) {
     if(!story){
         return new Response(JSON.stringify({error: "No story generated"}), {status: 500})
     }
-    
+
     return new Response(JSON.stringify({story}), {status:200})
 
     } 
     catch(error){
+        alert(error)
         return new Response(JSON.stringify({error: "Story Generation Failed"}), {status: 500})
     }
 }

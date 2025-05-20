@@ -1,7 +1,8 @@
 import React from "react";
 import { X } from 'lucide-react';
 
-export default function SourceFile(fileDetails) {
+export default function SourceFile(file) {
+    //filepreview is like a few lines of text from the file
 
     return (
         <div className="space-y-4">
