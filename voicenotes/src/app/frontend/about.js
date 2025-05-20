@@ -10,8 +10,8 @@ export default function Landing() {
     <div>
         <section id="about" className="scroll-mt-80"> </section>
         <div className="flex flex-col items-center justify-center">
-          <div className="max-w-lg text-center">
-            <p className="md:text-xl text-l font-medium">
+          <div className="md:max-w-lg max-w-md text-center">
+            <p className="md:text-xl font-medium">
               An AI-driven web app that transforms study materials into engaging audio
               content. Users can upload a PDF, notes, or even just a topic, and the
               system will use AI to generate an accurate and creative podcast-style
