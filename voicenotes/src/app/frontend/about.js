@@ -19,7 +19,7 @@ export default function Landing() {
             </p>
           </div>
           <a href="#upload" className="mt-10 bg-gray-800 text-white px-11 py-4 rounded-lg text-xl hover:bg-gray-950 scale-108 focus:outline-none focus:ring-1
-                      focus:ring-gray-400 focus:ring-opacity-70 transition-all duration-500 cursor-pointer
+                      focus:ring-gray-400 focus:ring-opacity-70 transition-all duration-500 cursor-pointer 
                       hover:text-green-400 transition-colors hover:shadow-lg active:scale-105 active:opacity-80 active:text-yellow-300 ">
 
             Start generating

@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] ">
       <NavBar />
       <main className="flex flex-col items-center justify-center flex-grow">
 
