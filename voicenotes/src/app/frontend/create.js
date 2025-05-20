@@ -5,23 +5,47 @@ import { X } from 'lucide-react';
 import SourceFile from "./components/SourceFile";
 
 export default function Create({ setStory, setLoadingScreen }) {
-    const [topic, setTopic] = useState("")
-    const [files, setFiles] = useState([])
+    const [topic, setTopic] = useState("");
+    const [files, setFiles] = useState([]); // raw File objects
+    const [parsedFiles, setParsedFiles] = useState([]); // parsed text previews
     const [config, setConfig] = useState({
         gradeLevel: "College Sophomore",
         storyType: "Creative",
         genre: "Mystery",
         narration: "first person"
-    })
+    });
+
+    const handleFileUpload = async (newFiles) => {
+        for (const file of newFiles) {
+            const formData = new FormData();
+            formData.append("pdfFile", file);
+
+            try {
+                const response = await fetch("/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    setParsedFiles((prev) => [...prev, {
+                        filename: file.name,
+                        filepreview: data.content.slice(0, 500), // preview
+                        fullText: data.content
+                    }]);
+                } else {
+                    alert(data.message || "Failed to parse file.");
+                }
+            } catch (err) {
+                console.error("Upload error:", err);
+            }
+        }
+    };
 
     const handleGenerate = async () => {
-        setLoadingScreen(true)
+        setLoadingScreen(true);
 
-        const fileTexts = []
-        for (const file of files) {
-            const text = await file.text()
-            fileTexts.push(text)
-        }
+        const fileTexts = parsedFiles.map(file => file.fullText);
 
         const response = await fetch("/api/generateStory", {
             method: "POST",
@@ -29,33 +53,28 @@ export default function Create({ setStory, setLoadingScreen }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ topic, fileTexts, ...config })
-        })
+        });
 
-        const data = await response.json()
-
+        const data = await response.json();
         if (data.story) {
-            alert("story generated")
-            setStory(data.story)
+            alert("Story generated!");
+            setStory(data.story);
         } else {
-            alert(data.error || "An error occurred.")
+            alert(data.error || "An error occurred.");
         }
 
-        setLoadingScreen(false)
-    }
+        setLoadingScreen(false);
+    };
 
     return (
-        <div className="mt-40 bg-white flex flex-col items-center p-6 ">
-            <section id="upload" className="scroll-mt-55"></section>
+        <div className="mt-40 bg-white flex flex-col items-center p-6">
             <h1 className="text-4xl font-bold mb-8">Create a VoiceNote</h1>
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
 
-                {/* 🟢 LEFT PANEL - SOURCES */}
+                {/* Left Panel - Sources */}
                 <div className="flex-1 bg-gray-100 rounded-2xl shadow-md p-6">
-                    <h2 className="text-lg font-semibold mb-4 text-center border-b border-white-300 w-full my-4 pb-3">
-                        Sources
-                    </h2>
+                    <h2 className="text-lg font-semibold mb-4 text-center border-b border-white-300 w-full my-4 pb-3">Sources</h2>
 
-                    {/* 🔄 REPLACED SECTION: File Input + Drag & Drop Upload */}
                     <input
                         id="fileInput"
                         type="file"
@@ -63,8 +82,9 @@ export default function Create({ setStory, setLoadingScreen }) {
                         multiple
                         hidden
                         onChange={(e) => {
-                            const selectedFiles = Array.from(e.target.files);
-                            setFiles([...files, ...selectedFiles]);
+                            const selected = Array.from(e.target.files);
+                            setFiles([...files, ...selected]);
+                            handleFileUpload(selected);
                         }}
                     />
 
@@ -74,37 +94,34 @@ export default function Create({ setStory, setLoadingScreen }) {
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={(e) => {
                             e.preventDefault();
-                            const droppedFiles = Array.from(e.dataTransfer.files);
-                            setFiles([...files, ...droppedFiles]);
+                            const dropped = Array.from(e.dataTransfer.files);
+                            setFiles([...files, ...dropped]);
+                            handleFileUpload(dropped);
                         }}
                     >
-                        <p className="text-gray-500">
-                            Drag & drop files or <span className="text-blue-600 underline">Browse</span>
-                        </p>
+                        <p className="text-gray-500">Drag & drop PDFs or <span className="text-blue-600 underline">Browse</span></p>
                     </div>
 
                     <div className="space-y-4">
-                        {files.map((file, index) => (
-                            <SourceFile key={index} file={file} />
+                        {parsedFiles.map((file, index) => (
+                            <SourceFile key={index} {...file} />
                         ))}
                     </div>
                 </div>
 
-                {/* ⚙️ RIGHT PANEL - CONFIG */}
+                {/* Right Panel - Config */}
                 <div className="flex-1 bg-gray-100 rounded-2xl shadow-md p-6">
                     <h2 className="text-lg font-semibold mb-4 text-center border-b border-white-300 w-full my-4 pb-3">Configuration</h2>
 
-                    {/* grade Level input */}
+                    {/* Grade Level Input */}
                     <div className="mb-4 relative">
                         <label className="block text-m font-medium mb-1 text-center">Grade Level</label>
                         <input
                             type="text"
                             value={config.gradeLevel}
-                            onChange={(e) => { setConfig({ ...config, gradeLevel: e.target.value }) }}
-                            placeholder="ex. College Sophomore"
+                            onChange={(e) => setConfig({ ...config, gradeLevel: e.target.value })}
                             className="px-3 py-2 border rounded-md mx-auto flex"
                         />
-
                         {config.gradeLevel && (
                             <button
                                 onClick={() => setConfig({ ...config, gradeLevel: "" })}
@@ -114,35 +131,30 @@ export default function Create({ setStory, setLoadingScreen }) {
                         )}
                     </div>
 
-                    {/* story type buttons */}
+                    {/* Story Type */}
                     <div className="flex flex-col mb-4 items-center">
                         <label className="block text-m font-medium mb-1 text-center">Type of Story</label>
                         <div className="flex gap-2">
-                            <button
-                                onClick={() => { setConfig({ ...config, storyType: "Educational" }) }}
-                                className={`${config.storyType === "Educational" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md cursor-pointer`}>
-                                Educational
-                            </button>
-
-                            <button
-                                onClick={() => { setConfig({ ...config, storyType: "Creative" }) }}
-                                className={`${config.storyType === "Creative" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md cursor-pointer`}>
-                                Creative
-                            </button>
+                            {["Educational", "Creative"].map(type => (
+                                <button
+                                    key={type}
+                                    onClick={() => setConfig({ ...config, storyType: type })}
+                                    className={`${config.storyType === type ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md`}>
+                                    {type}
+                                </button>
+                            ))}
                         </div>
                     </div>
 
-                    {/* genre input */}
+                    {/* Genre */}
                     <div className="mb-4 relative">
                         <label className="block text-m font-medium mb-1 text-center">Genre</label>
                         <input
                             type="text"
                             value={config.genre}
-                            onChange={(e) => { setConfig({ ...config, genre: e.target.value }) }}
-                            placeholder="ex. Mystery"
-                            className="w/2 px-3 py-2 border rounded-md mx-auto flex"
+                            onChange={(e) => setConfig({ ...config, genre: e.target.value })}
+                            className="px-3 py-2 border rounded-md mx-auto flex"
                         />
-
                         {config.genre && (
                             <button
                                 onClick={() => setConfig({ ...config, genre: "" })}
@@ -152,33 +164,29 @@ export default function Create({ setStory, setLoadingScreen }) {
                         )}
                     </div>
 
-                    {/* narration style */}
-                    <div className="flex flex-col mb-4 items-center ">
+                    {/* Narration Style */}
+                    <div className="flex flex-col mb-4 items-center">
                         <label className="block text-m font-medium mb-1 text-center">Narration Style</label>
                         <div className="flex gap-2">
-                            <button
-                                onClick={() => { setConfig({ ...config, narration: "first person" }) }}
-                                className={`${config.narration === "first person" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md cursor-pointer`}>
-                                First Person
-                            </button>
-
-                            <button
-                                onClick={() => { setConfig({ ...config, narration: "third person" }) }}
-                                className={`${config.narration === "third person" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md cursor-pointer`}>
-                                Third Person
-                            </button>
+                            {["first person", "third person"].map(style => (
+                                <button
+                                    key={style}
+                                    onClick={() => setConfig({ ...config, narration: style })}
+                                    className={`${config.narration === style ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"} px-3 py-1 rounded-md`}>
+                                    {style.replace(" person", " Person")}
+                                </button>
+                            ))}
                         </div>
                     </div>
 
-                    {/* generate button */}
+                    {/* Generate Button */}
                     <button
-                        onClick={() => handleGenerate()}
-                        className="w-full bg-gray-200 active:bg-gray-800 active:text-white mt-4 bg-white border border-gray-300 text-black py-2 rounded-md hover:bg-gray-200 focus:ring-1 focus:ring-gray-100 cursor-pointer duration-300">
+                        onClick={handleGenerate}
+                        className="w-full bg-white border border-gray-300 text-black py-2 rounded-md hover:bg-gray-200 active:bg-gray-800 active:text-white transition">
                         Generate
                     </button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
-
