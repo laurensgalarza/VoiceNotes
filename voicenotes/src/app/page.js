@@ -5,6 +5,8 @@ import Landing from "./frontend/landing";
 import About from "./frontend/about";
 import Create from "./frontend/create";
 import Result from "./frontend/result";
+import Footer from "./frontend/footer";
+
 import { useState } from "react";
 
 export default function Home() {
@@ -29,6 +31,8 @@ export default function Home() {
         <Create setStory={setStory} setLoadingScreen={setLoadingScreen} />
         <Result story={story}/>
       </main>
+      
+        <Footer />
     </div>
   );
 }
