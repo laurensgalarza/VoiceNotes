@@ -70,14 +70,14 @@ export default function Create({ setStory, setLoadingScreen }) {
     return (
         <div>
             <section id="upload" className="scroll-mt-10"> </section>
-        <div className="mt-40 bg-white flex flex-col items-center p-6">
+        <div className="md:mt-40 mt-24 bg-white flex flex-col items-center p-6">
             <h1 className="text-4xl font-bold mb-8">Create a VoiceNote</h1>
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
 
                 {/* Left Panel - Sources */}
                 <div  className="flex-1 bg-gray-100 rounded-2xl shadow-md p-6">
                     <h2 className="text-lg font-semibold mb-4 text-center border-b border-white-300 w-full my-4 pb-3">Sources</h2>
-                    <input type="text" value={topic} onChange={(e) => {setTopic(e.target.value)}} placeholder="Enter a topic" className="px-6 py-2 border rounded-md focus:outline-none text-center my-2 mt-0 border-gray-300 hover:border-gray-500"/>
+                    <input type="text" value={topic} onChange={(e) => {setTopic(e.target.value)}} placeholder="Enter a topic" className="px-6 py-2 border rounded-md focus:outline-none text-center my-2 mt-0 border-gray-300 hover:border-gray-500 w-full"/>
                     <input
                         id="fileInput"
                         type="file"

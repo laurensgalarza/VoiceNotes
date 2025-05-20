@@ -54,7 +54,7 @@ export default function Result({story}) {
           Upload more files
         </button>
       </div>
-      <p className="text-4xl text-gray-700 m-30 font-semibold text-center">
+      <p className="text-4xl text-gray-700 md:m-30 mt-30 font-semibold text-center">
         Thanks for using VoiceNotes!
       </p>
     </div>
