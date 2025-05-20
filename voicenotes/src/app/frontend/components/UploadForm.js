@@ -1,3 +1,4 @@
+// components/UploadForm.js
 import React, { useState } from "react";
 import SourceFile from "./SourceFile";
 
@@ -21,7 +22,7 @@ export default function UploadForm() {
             if (response.ok) {
                 setFileData({
                     filename: file.name,
-                    filepreview: data.content.slice(0, 500) // just first 500 chars
+                    filepreview: data.content.slice(0, 500) // preview only
                 });
             } else {
                 alert(data.message || "Upload failed");
