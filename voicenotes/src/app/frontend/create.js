@@ -68,8 +68,23 @@ export default function Create({setStory, setLoadingScreen}) {
 
             <div className=" mx-auto flex mb-4 w-60 rounded-md overflow-hidden">
             <input type="text" value={topic} onChange={(e) => {setTopic(e.target.value)}} placeholder="Enter a topic" className="w-1/2 px-2 py-1 border border-r-0 rounded-l-md focus:outline-none"/>
-            <button className="w-1/2 bg-gray-800 text-white px-2 py-1 rounded-r-md hover:bg-gray-900 duration-500 active:opacity-80 cursor-pointer">
-                Upload Files
+            <input
+              id="fileInput"
+              type="file"
+              accept=".pdf"
+              multiple
+              hidden
+              onChange={(e) => {
+                const selectedFiles = Array.from(e.target.files);
+                setFiles([...files, ...selectedFiles]);
+              }}
+            />
+            
+            <button
+              onClick={() => document.getElementById("fileInput").click()}
+              className="w-1/2 bg-gray-800 text-white px-2 py-1 rounded-r-md hover:bg-gray-900 duration-500 active:opacity-80 cursor-pointer"
+            >
+              Upload Files
             </button>
             </div>
 
