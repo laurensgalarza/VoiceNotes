@@ -15,7 +15,7 @@ export default function Home() {
     
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)] ">
       <NavBar />
-      <main className="flex flex-col items-center justify-center flex-grow">
+      <main className="flex flex-col items-center justify-center flex-grow overflow-x-hidden ">
 
       {loadingScreen && (<div id="loading" className="fixed inset-0 min-h-screen min-w-screen bg-white/85 content-center items-center text-center z-2">
 

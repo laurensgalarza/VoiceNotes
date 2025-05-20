@@ -1,6 +1,6 @@
 //about section
 import React from "react";
-import { ArrowRight} from 'lucide-react'; 
+import { ArrowRight, ArrowDown} from 'lucide-react'; 
 import { ArrowUpFromLine } from 'lucide-react';
 import { Settings } from 'lucide-react';
 import { Volume2 } from 'lucide-react';
@@ -25,13 +25,10 @@ export default function Landing() {
             Start generating
           </a>
         </div>
-        <div className="hidden md:flex mt-70 mb-10 font-bold text-4xl text-center mx-auto w-fit">  
+        <div className="flex mt-70 mb-10 font-bold lg:text-4xl md:text-3xl text-2xl text-center mx-auto w-fit ">  
           Tailor studying to fit your needs
         </div>
 
-        <div className="md:hidden mt-70 mb-10 font-bold text-3xl text-center mx-auto w-fit  ">  
-                    Tailor studying to fit your needs
-        </div>
 
       <div className="py-12">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
