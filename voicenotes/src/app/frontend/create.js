@@ -129,8 +129,9 @@ export default function Create({ setStory, setLoadingScreen }) {
                         {config.gradeLevel && (
                             <button
                                 onClick={() => setConfig({ ...config, gradeLevel: "" })}
-                                className="absolute inset-y-0 right-6 flex items-center cursor-pointer text-gray-500 hover:text-gray-700">
-                                <X className="text-lg mt-7 mr-5" />
+                                className="absolute inset-y-0 right-0 flex items-center cursor-pointer text-gray-500 hover:text-gray-700">
+                                <X className="hidden md:flex text-lg mt-7 mr-2" />
+                                <X className="md:hidden text-lg mt-7 mr-6" />
                             </button>
                         )}
                     </div>
@@ -164,7 +165,8 @@ export default function Create({ setStory, setLoadingScreen }) {
                             <button
                                 onClick={() => setConfig({ ...config, genre: "" })}
                                 className="absolute inset-y-0 right-0 flex items-center cursor-pointer text-gray-500 hover:text-gray-700 z-10">
-                                <X className="text-lg mt-7 mr-11" />
+                                <X className="hidden md:flex text-lg mt-7 mr-2" />
+                                <X className="md:hidden text-lg mt-7 mr-6" />
                             </button>
                         )}
                     </div>
