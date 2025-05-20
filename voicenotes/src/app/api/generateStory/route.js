@@ -29,13 +29,17 @@ export async function POST(req) {
 
     const prompt = `You are an educational storytelling assitant. 
     
-    Generate a ${storyType} story for a ${gradeLevel} student. The story should be in the ${genre} genre, told in the ${narration} narration style, based on the following material:
+    Generate a ${storyType} podcast-style for a ${gradeLevel} student. The story should be in the ${genre} genre, told in the ${narration} narration style, based on the following material:
 
     ${inputText.join("\n\n")}
     
-    The story should be engaging, accurate, and appropriate for the students level of comprehension. Additionally, the story must be in a Google Text to Speech compatible format.
+    Guidelines: 
+    - The story must be engaging and easy to follow for the target grade level.
+    - Do NOT include titles, speaker labels, scene directions, or sound effects (e.g., "Narrator:", "Title:", "[music fades]", "**bold text**", etc.).
+    - Write in plain paragraph form only, suitable for text-to-speech narration.
+    - Keep the story under 500 words.
 
-    Only output the story. Begin:
+    Begin:
     `
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",

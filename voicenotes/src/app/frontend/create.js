@@ -73,7 +73,7 @@ export default function Create({setStory, setLoadingScreen}) {
             </button>
             </div>
 
-
+            
             <div className="space-y-4">
                 {files.map((file, index) => (
                     <SourceFile key={index} file={file}/>
