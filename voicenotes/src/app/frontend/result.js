@@ -29,6 +29,7 @@ export default function Result({ story }) {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       setAudioUrl(url);
+      console.log("AUDIO URL:", url);
 
       // Optional autoplay
       const audio = new Audio(url);
@@ -77,13 +78,13 @@ export default function Result({ story }) {
         </div>
       </div>
 
-      {/* audio preview
+      {/* audio preview */}
       {audioUrl && (
         <div className="text-center mt-4">
           <audio controls src={audioUrl}></audio>
           <p className="text-sm text-gray-600 mt-2">Audio preview of your story</p>
         </div>
-      )} */}
+      )}
 
       <div className="text-center m-10 text-3xl">
         Start Listening to Your Cool Story!
