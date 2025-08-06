@@ -5,7 +5,7 @@ export async function POST(req) {
 
     try {
         const {
-            topic,
+            topics, 
             fileTexts, //file array
             gradeLevel,
             storyType,
@@ -15,8 +15,8 @@ export async function POST(req) {
 
         const inputText = [];
 
-        if (topic) {
-            inputText.push("Topic: " + topic)
+        if (topics) {
+            inputText.push("Topics: " + topics)
         }
         if (Array.isArray(fileTexts) && fileTexts.length > 0) {
             inputText.push("Uploaded File Content: \n" + fileTexts.join("\n\n"))
